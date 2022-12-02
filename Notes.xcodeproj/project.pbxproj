@@ -13,6 +13,11 @@
 		6F0FCC9529222FA7008F55BB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F0FCC9429222FA7008F55BB /* Preview Assets.xcassets */; };
 		6F0FCC9729222FA7008F55BB /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FCC9629222FA7008F55BB /* Persistence.swift */; };
 		6F0FCC9A29222FA7008F55BB /* Notes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FCC9829222FA7008F55BB /* Notes.xcdatamodeld */; };
+		6F0FCCA12922321B008F55BB /* CreateNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FCCA02922321B008F55BB /* CreateNoteView.swift */; };
+		C85B99CF293A427100B18D53 /* NewContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85B99CE293A427100B18D53 /* NewContentView.swift */; };
+		C85B99D1293A43CD00B18D53 /* CreateNewTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85B99D0293A43CD00B18D53 /* CreateNewTask.swift */; };
+		C85B99D3293A483C00B18D53 /* PickerFrequency.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85B99D2293A483C00B18D53 /* PickerFrequency.swift */; };
+		C85B99D5293A5ED600B18D53 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85B99D4293A5ED600B18D53 /* Categories.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +28,11 @@
 		6F0FCC9429222FA7008F55BB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6F0FCC9629222FA7008F55BB /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		6F0FCC9929222FA7008F55BB /* Notes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Notes.xcdatamodel; sourceTree = "<group>"; };
+		6F0FCCA02922321B008F55BB /* CreateNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteView.swift; sourceTree = "<group>"; };
+		C85B99CE293A427100B18D53 /* NewContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewContentView.swift; sourceTree = "<group>"; };
+		C85B99D0293A43CD00B18D53 /* CreateNewTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewTask.swift; sourceTree = "<group>"; };
+		C85B99D2293A483C00B18D53 /* PickerFrequency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerFrequency.swift; sourceTree = "<group>"; };
+		C85B99D4293A5ED600B18D53 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +49,10 @@
 		6F0FCC8129222F9F008F55BB = {
 			isa = PBXGroup;
 			children = (
+				C85B99D4293A5ED600B18D53 /* Categories.swift */,
+				C85B99D2293A483C00B18D53 /* PickerFrequency.swift */,
+				C85B99D0293A43CD00B18D53 /* CreateNewTask.swift */,
+				C85B99CE293A427100B18D53 /* NewContentView.swift */,
 				6F0FCC8C29222F9F008F55BB /* Notes */,
 				6F0FCC8B29222F9F008F55BB /* Products */,
 			);
@@ -57,6 +71,7 @@
 			children = (
 				6F0FCC8D29222F9F008F55BB /* NotesApp.swift */,
 				6F0FCC8F29222F9F008F55BB /* ContentView.swift */,
+				6F0FCCA02922321B008F55BB /* CreateNoteView.swift */,
 				6F0FCC9129222FA7008F55BB /* Assets.xcassets */,
 				6F0FCC9629222FA7008F55BB /* Persistence.swift */,
 				6F0FCC9829222FA7008F55BB /* Notes.xcdatamodeld */,
@@ -143,9 +158,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C85B99D3293A483C00B18D53 /* PickerFrequency.swift in Sources */,
+				C85B99D1293A43CD00B18D53 /* CreateNewTask.swift in Sources */,
 				6F0FCC9729222FA7008F55BB /* Persistence.swift in Sources */,
+				C85B99CF293A427100B18D53 /* NewContentView.swift in Sources */,
 				6F0FCC9029222F9F008F55BB /* ContentView.swift in Sources */,
+				C85B99D5293A5ED600B18D53 /* Categories.swift in Sources */,
 				6F0FCC8E29222F9F008F55BB /* NotesApp.swift in Sources */,
+				6F0FCCA12922321B008F55BB /* CreateNoteView.swift in Sources */,
 				6F0FCC9A29222FA7008F55BB /* Notes.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

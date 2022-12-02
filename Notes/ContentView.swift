@@ -10,20 +10,20 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    
+    @State private var showNewNoteSheet = false
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Note.updatedAt, ascending: false)],
         animation: .default)
-    private var items: FetchedResults<Item>
+    private var notes: FetchedResults<Note>
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+                ForEach(notes) { note in
+                    NavigationLink(value: note) {
+                        Text(note.headline ?? "")
                     }
                 }
                 .onDelete(perform: deleteItems)
@@ -33,10 +33,21 @@ struct ContentView: View {
                     EditButton()
                 }
                 ToolbarItem {
-                    Button(action: addItem) {
+                    Button {
+                        showNewNoteSheet.toggle()
+                    } label: {
                         Label("Add Item", systemImage: "plus")
                     }
                 }
+            }
+            .sheet(isPresented: $showNewNoteSheet) {
+                CreateNoteView()
+            }
+            .navigationDestination(for: Note.self) { note in
+                VStack {
+                    Text(note.text ?? "")
+                }
+                .navigationTitle(note.headline ?? "")
             }
             Text("Select an item")
         }
@@ -60,7 +71,7 @@ struct ContentView: View {
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
+            offsets.map { notes[$0] }.forEach(viewContext.delete)
 
             do {
                 try viewContext.save()
@@ -76,7 +87,7 @@ struct ContentView: View {
 
 private let itemFormatter: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.dateStyle = .short
+    formatter.dateStyle = .full
     formatter.timeStyle = .medium
     return formatter
 }()

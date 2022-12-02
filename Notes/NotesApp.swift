@@ -2,7 +2,7 @@
 //  NotesApp.swift
 //  Notes
 //
-//  Created by Garrit Schaap on 2022-11-14.
+//  Created by Ludvig Krantzén on 2022-12-02.
 //
 
 import SwiftUI
@@ -13,7 +13,7 @@ struct NotesApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NewContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
