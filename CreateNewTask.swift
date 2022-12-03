@@ -27,7 +27,7 @@ struct CreateNewTask: View {
     
     let presetTasks: [TaskTemplate] = [
     TaskTemplate(name: "Go to the gym", category: "Fitness"),
-    TaskTemplate(name: "Buy Groceries", category: "Walk the dog"),
+    TaskTemplate(name: "Buy Groceries", category: "Chores"),
     TaskTemplate(name: "Walk the dog", category: "Health")
     ]
     
@@ -138,6 +138,7 @@ struct CreateNewTask: View {
             newTaskObject.category = category
             newTaskObject.frequency = selectedPriority.rawValue
             newTaskObject.isComplete = false
+            newTaskObject.points = 2
 
             do {
                 try viewContext.save()
@@ -160,7 +161,8 @@ struct CreateNewTask: View {
             newTaskObject.category = selectedCategory
             newTaskObject.frequency = selectedPriority.rawValue
             newTaskObject.isComplete = false
-
+            newTaskObject.points = 1
+            
             do {
                 try viewContext.save()
             } catch {

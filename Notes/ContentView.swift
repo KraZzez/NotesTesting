@@ -53,7 +53,7 @@ struct ContentView: View {
         }
     }
 
-    private func addItem() {
+ /*   private func addItem() {
         withAnimation {
             let newItem = Item(context: viewContext)
             newItem.timestamp = Date()
@@ -67,7 +67,7 @@ struct ContentView: View {
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
-    }
+    } */
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {

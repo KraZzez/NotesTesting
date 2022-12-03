@@ -18,30 +18,36 @@ struct NewContentView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \TaskObject.createdAt, ascending: false)],
         animation: .default)
     private var taskObjects: FetchedResults<TaskObject>
+    var date: [StoredDate] = []
     
     var body: some View {
         NavigationStack {
+            
             List {
                 ForEach(taskObjects) { task in
+                    HStack {
+                        Button {
+                            task.isComplete = true
+                            saveItems()
+                        } label: {
+                            if !task.isComplete {
+                                Image(systemName: "circle")
+                            } else if task.isComplete {
+                                Image(systemName: "circle.fill")
+                            }
+                        }
+                        Text(task.name ?? "")
+                        Text(task.frequency ?? "")
+                        Text(task.category ?? "")
+                    }
                     
-                    Button {
-                        task.isComplete.toggle()
-                    } label: {
-                        if !task.isComplete {
-                            Image(systemName: "circle")
-                        } else if task.isComplete {
-                            Image(systemName: "circle.fill")
+               /*     .alert("Complete task?", isPresented: $showConfirmationMessage) {
+                        Button(role: .destructive) {
+                            task.isComplete = true
+                        } label: {
+                            Text("Yes")
                         }
-                    }
-                    NavigationLink(value: task) {
-                        HStack {
-                            
-                            Divider()
-                            Text(task.name ?? "")
-                            Text(task.frequency ?? "")
-                            Text(task.category ?? "")
-                        }
-                    }
+                    } */
                 }
                 .onDelete(perform: deleteItems)
             }
@@ -60,20 +66,16 @@ struct NewContentView: View {
             .sheet(isPresented: $showNewTaskSheet) {
                 CreateNewTask()
             }
-            .navigationDestination(for: TaskObject.self) { task in
-                VStack {
-                    Text(task.name ?? "")
-                }
-                .navigationTitle(task.name ?? "")
-            }
-            Text("Select an item")
+        }
+        .onAppear {
+            
         }
     }
-
+    
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             offsets.map { taskObjects[$0] }.forEach(viewContext.delete)
-
+            
             do {
                 try viewContext.save()
             } catch {
@@ -85,6 +87,17 @@ struct NewContentView: View {
         }
     }
     
+    private func saveItems() {
+        do {
+            try viewContext.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nsError = error as NSError
+            //                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
 }
 
 struct NewContentView_Previews: PreviewProvider {
