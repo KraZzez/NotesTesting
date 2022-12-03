@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CreateNewTask: View {
+struct CreateNewTaskView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -179,9 +179,9 @@ struct CreateNewTask: View {
     
 }
 
-struct CreateNewTask_Previews: PreviewProvider {
+struct CreateNewTaskView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateNewTask()
+        CreateNewTaskView()
     }
 }
 

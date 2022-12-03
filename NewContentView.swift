@@ -18,13 +18,16 @@ struct NewContentView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \TaskObject.createdAt, ascending: false)],
         animation: .default)
     private var taskObjects: FetchedResults<TaskObject>
-    var date: [StoredDate] = []
+    @State var selectedPriority: FrequencyPicker = .daily
+    @State var filteredArray: [TaskObject] = []
     
     var body: some View {
         NavigationStack {
             
+            
+            PickerFrequency(selectedFrequency: $selectedPriority)
             List {
-                ForEach(taskObjects) { task in
+                ForEach(filteredArray) { task in
                     HStack {
                         Button {
                             task.isComplete = true
@@ -41,13 +44,15 @@ struct NewContentView: View {
                         Text(task.category ?? "")
                     }
                     
-               /*     .alert("Complete task?", isPresented: $showConfirmationMessage) {
-                        Button(role: .destructive) {
-                            task.isComplete = true
-                        } label: {
-                            Text("Yes")
-                        }
-                    } */
+                    
+                    
+                    /*     .alert("Complete task?", isPresented: $showConfirmationMessage) {
+                     Button(role: .destructive) {
+                     task.isComplete = true
+                     } label: {
+                     Text("Yes")
+                     }
+                     } */
                 }
                 .onDelete(perform: deleteItems)
             }
@@ -62,14 +67,33 @@ struct NewContentView: View {
                         Label("Add Item", systemImage: "plus")
                     }
                 }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    NavigationLink {
+                        NewTestView()
+                    } label: {
+                        Image(systemName: "person.fill")
+                    }
+                    
+                }
             }
             .sheet(isPresented: $showNewTaskSheet) {
-                CreateNewTask()
+                CreateNewTaskView()
             }
         }
+        
         .onAppear {
-            
+            print("TET")
+            updateFilteredArray()
         }
+        .onChange(of: selectedPriority, perform: { newValue in
+            updateFilteredArray()
+        })
+    }
+    
+    private func updateFilteredArray() {
+        filteredArray = taskObjects.filter({ task in
+            return task.frequency == selectedPriority.rawValue
+        })
     }
     
     private func deleteItems(offsets: IndexSet) {
@@ -94,7 +118,6 @@ struct NewContentView: View {
             // Replace this implementation with code to handle the error appropriately.
             // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             let nsError = error as NSError
-            //                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
     }
